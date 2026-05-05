@@ -571,9 +571,7 @@ Each dashboard should explain:
 
 ## 23. Commands
 
-Project commands should be documented once the site is scaffolded.
-
-Expected commands may eventually include:
+Current project commands:
 
 ```bash
 npm install
@@ -581,10 +579,6 @@ npm run dev
 npm run build
 npm run preview
 ```
-
-Do not assume these commands exist until the Astro project has been initialized.
-
-Update this section after the scaffold is created.
 
 ---
 

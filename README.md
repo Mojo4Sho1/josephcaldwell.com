@@ -127,7 +127,7 @@ The project should favor reusable components, structured content, and clear sepa
 
 ## Local Development
 
-The Astro site has not yet been initialized. There is no `package.json` in the repository yet, and dependencies have not been installed. The directory layout, planning documents, and `.nvmrc` are in place; Astro initialization is the next implementation step.
+The Astro scaffold has been initialized with static output and MDX support. The full site design and page implementation are still pending.
 
 The repository pins its Node version through `.nvmrc`:
 
@@ -137,7 +137,7 @@ nvm use
 
 If a different Node version manager is in use (e.g. `fnm`, `asdf`), it should respect `.nvmrc` similarly.
 
-Expected commands after Astro is initialized:
+Local development commands:
 
 ```bash
 npm install
@@ -145,8 +145,6 @@ npm run dev
 npm run build
 npm run preview
 ```
-
-These commands should be updated once the project structure and package scripts are created.
 
 ---
 
