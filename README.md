@@ -51,6 +51,7 @@ Before scaffolding or modifying the site, read the planning documents in this re
 - [`DESIGN_BRIEF.md`](./DESIGN_BRIEF.md) — project goals, audience, positioning, site map, visual direction, and non-goals
 - [`CONTENT_MODEL.md`](./CONTENT_MODEL.md) — structured content types and reusable content fields
 - [`AGENTS.md`](./AGENTS.md) — instructions for coding agents working in this repository
+- [`CURRENT_STATUS.md`](./CURRENT_STATUS.md) — living handoff document showing the current project stage, validation status, blockers, and the next recommended step. Updated after meaningful project changes.
 
 These documents define the intended direction of the site.
 
@@ -226,13 +227,17 @@ See [`NOTICE.md`](./NOTICE.md) for the distinction between the MIT-licensed sour
 
 ## Current Status
 
-This repository is in the planning and scaffolding stage.
+This repository is in the scaffolding stage. Stage 1 (Astro initialization) is complete; the full site design and page implementation have not started.
 
-Current planning files:
+For the live snapshot of stage, validation status, blockers, and the next recommended step, see [`CURRENT_STATUS.md`](./CURRENT_STATUS.md).
+
+Current planning and project documents:
 
 - `DESIGN_BRIEF.md`
 - `CONTENT_MODEL.md`
+- `IMPLEMENTATION_PLAN.md`
+- `PROJECT_REVIEW.md`
 - `AGENTS.md`
+- `CURRENT_STATUS.md`
+- `NOTICE.md`
 - `README.md`
-
-The next major step is to scaffold the Astro static site according to the design brief and content model.

@@ -16,9 +16,10 @@ Before making substantial changes, read:
 DESIGN_BRIEF.md
 CONTENT_MODEL.md
 AGENTS.md
+CURRENT_STATUS.md
 ```
 
-These files define the project intent, content structure, and working rules.
+These files define the project intent, content structure, and working rules. `CURRENT_STATUS.md` is the living handoff snapshot that records the current stage, validation status, blockers, and the next recommended step.
 
 ---
 
@@ -628,7 +629,25 @@ Accurate placeholders are better than invented content.
 
 ---
 
-## 25. Final Working Principle
+## 25. Status Document Maintenance
+
+`CURRENT_STATUS.md` is the living project handoff snapshot. It must stay accurate so that Joseph and future agents can resume work after time away without rebuilding context from scratch.
+
+Update `CURRENT_STATUS.md` when any of the following happens:
+
+- A stage in `IMPLEMENTATION_PLAN.md` is completed.
+- The current stage changes.
+- Validation status changes (a previously passing command now fails, or a previously failing command now passes).
+- A blocker, risk, or known issue is discovered or resolved.
+- Major files are added, removed, or restructured, or an architecture decision changes.
+
+Tiny typo fixes and formatting-only edits do not require a status update unless they affect project state.
+
+When you update the file, refresh at minimum the `Last Updated` block and any other section the change touches (stage, completed work, validation status, blockers, next step). Keep it concise — it is a snapshot, not a changelog. Git history covers history.
+
+---
+
+## 26. Final Working Principle
 
 Every change should support this central identity:
 
