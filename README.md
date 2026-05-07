@@ -130,17 +130,18 @@ The project should favor reusable components, structured content, and clear sepa
 
 The Astro scaffold has been initialized with static output and MDX support. The full site design and page implementation are still pending.
 
-The repository pins its Node version through `.nvmrc`:
+The project uses **Node 22**, pinned through `.nvmrc`. Run `nvm use` (or the equivalent for your version manager) before installing, building, or validating so that local work and CI agree on the Node major version.
 
 ```bash
 nvm use
 ```
 
-If a different Node version manager is in use (e.g. `fnm`, `asdf`), it should respect `.nvmrc` similarly.
+If a different Node version manager is in use (e.g. `fnm`, `asdf`), it should respect `.nvmrc` similarly. Do not build or validate the site on a different Node major version.
 
 Local development commands:
 
 ```bash
+nvm use
 npm install
 npm run dev
 npm run build

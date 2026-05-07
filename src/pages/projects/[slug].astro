@@ -1,0 +1,38 @@
+---
+import { getCollection, render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const PUBLIC_RENDERABLE = ["public", "sanitized", "synthetic-demo"] as const;
+
+export async function getStaticPaths() {
+  const entries = await getCollection("projects", ({ data }) =>
+    (["public", "sanitized", "synthetic-demo"] as const).includes(
+      data.visibility,
+    ),
+  );
+  return entries.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<"projects">;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<BaseLayout title={entry.data.title} description={entry.data.summary}>
+  <article>
+    <h1>{entry.data.title}</h1>
+    <p class="lede">{entry.data.summary}</p>
+    <Content />
+    <p class="scaffold-notice">
+      This detail template is a scaffold. Verified project content will be
+      added as the site is finalized.
+    </p>
+  </article>
+</BaseLayout>

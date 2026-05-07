@@ -1,0 +1,42 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { withBase } from "../../utils/paths";
+
+const PUBLIC_RENDERABLE = ["public", "sanitized", "synthetic-demo"] as const;
+
+const entries = await getCollection("dashboards", ({ data }) =>
+  PUBLIC_RENDERABLE.includes(data.visibility),
+);
+---
+
+<BaseLayout
+  title="Dashboards"
+  description="Public dashboards, static demos, synthetic-data screenshots, and sanitized case studies. Verified content will be added as the site is finalized."
+>
+  <h1>Dashboards</h1>
+  <p class="scaffold-notice">
+    Verified dashboard entries will be added here as the site content is
+    finalized. Private dashboards will be presented through synthetic data,
+    sanitized screenshots, or short case studies only. This page is currently
+    a scaffold placeholder.
+  </p>
+  {
+    entries.length === 0 ? (
+      <p class="empty-state" role="status">
+        No dashboard entries are available yet.
+      </p>
+    ) : (
+      <ul class="entry-list">
+        {entries.map((entry) => (
+          <li>
+            <a href={withBase(`/dashboards/${entry.data.slug}/`)}>
+              {entry.data.title}
+            </a>
+            <p>{entry.data.summary}</p>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</BaseLayout>

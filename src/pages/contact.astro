@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { externalLinks } from "../data/links";
+
+const contactLinks = externalLinks
+  .filter((link) => link.showOnContact && link.url.trim() !== "")
+  .sort((a, b) => a.priority - b.priority);
+---
+
+<BaseLayout
+  title="Contact"
+  description="Contact and external profile links for Joseph Caldwell."
+>
+  <h1>Contact</h1>
+  <p class="scaffold-notice">
+    Verified contact information will be added here as the site is finalized.
+    This page is currently a scaffold placeholder. Only verified external
+    links are listed below.
+  </p>
+  {
+    contactLinks.length === 0 ? (
+      <p class="empty-state" role="status">
+        No verified external links are available yet.
+      </p>
+    ) : (
+      <ul class="entry-list">
+        {contactLinks.map((link) => (
+          <li>
+            <a href={link.url} rel="noopener">
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</BaseLayout>

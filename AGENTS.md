@@ -577,11 +577,23 @@ Each dashboard should explain:
 Current project commands:
 
 ```bash
+nvm use
 npm install
 npm run dev
 npm run build
 npm run preview
 ```
+
+### Node version
+
+The project is pinned to **Node 22** via `.nvmrc`. Future agents must use Node 22 before installing, building, or validating:
+
+```bash
+nvm use 22   # or: nvm use
+node --version
+```
+
+Do not validate, build, or commit on a different Node major version unless Joseph explicitly instructs otherwise. If `nvm` is not available in the environment, stop and report the issue rather than proceeding on a mismatched Node version. Do not change `.nvmrc` to work around an environment problem.
 
 ---
 

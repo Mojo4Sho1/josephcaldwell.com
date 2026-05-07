@@ -1,14 +1,16 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site";
 ---
 
 <BaseLayout
   title="Home"
-  description="Personal academic and technical website for Joseph Caldwell. Base layout and global styling foundation in place; full site implementation pending."
+  description={site.description}
 >
-  <h1>Joseph Caldwell Personal Website</h1>
-  <p>
-    Base layout and global styling foundation added. Full site implementation
-    pending.
+  <h1>{site.name}</h1>
+  <p class="lede">{site.identitySummary}</p>
+  <p class="scaffold-notice">
+    The version 1 page scaffold structure is now in place. Verified content,
+    final hero copy, and featured items will be added in later stages.
   </p>
 </BaseLayout>

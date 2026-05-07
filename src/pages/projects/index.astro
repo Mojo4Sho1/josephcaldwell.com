@@ -1,0 +1,40 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { withBase } from "../../utils/paths";
+
+const PUBLIC_RENDERABLE = ["public", "sanitized", "synthetic-demo"] as const;
+
+const entries = await getCollection("projects", ({ data }) =>
+  PUBLIC_RENDERABLE.includes(data.visibility),
+);
+---
+
+<BaseLayout
+  title="Projects"
+  description="Selected research, software, agentic systems, dashboard, and educational projects. Verified content will be added as the site is finalized."
+>
+  <h1>Projects</h1>
+  <p class="scaffold-notice">
+    Verified project entries will be added here as the site content is
+    finalized. This page is currently a scaffold placeholder.
+  </p>
+  {
+    entries.length === 0 ? (
+      <p class="empty-state" role="status">
+        No project entries are available yet.
+      </p>
+    ) : (
+      <ul class="entry-list">
+        {entries.map((entry) => (
+          <li>
+            <a href={withBase(`/projects/${entry.data.slug}/`)}>
+              {entry.data.title}
+            </a>
+            <p>{entry.data.summary}</p>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</BaseLayout>

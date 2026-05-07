@@ -1,0 +1,37 @@
+---
+import { existsSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { cv } from "../data/cv";
+import { withBase } from "../utils/paths";
+
+const cvAbsolutePath = fileURLToPath(
+  new URL(`../../public${cv.filePath}`, import.meta.url),
+);
+const cvAvailable = existsSync(cvAbsolutePath);
+const cvHref = withBase(cv.filePath);
+---
+
+<BaseLayout
+  title="CV"
+  description="Public academic CV for Joseph Caldwell."
+>
+  <h1>CV</h1>
+  <p>{cv.summary}</p>
+  {
+    cvAvailable ? (
+      <p>
+        <a href={cvHref}>Download CV (PDF)</a>
+      </p>
+    ) : (
+      <p class="scaffold-notice">
+        The public CV PDF has not yet been added to the repository. A download
+        link will appear here once the verified PDF is in place.
+      </p>
+    )
+  }
+  <p class="scaffold-notice">
+    This page is currently a scaffold. Additional CV metadata, last-updated
+    date, and a short academic profile will be added as the site is finalized.
+  </p>
+</BaseLayout>
