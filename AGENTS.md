@@ -376,6 +376,8 @@ When practical, use structured content collections or typed data files.
 
 If using Astro content collections, schema validation with `zod` is preferred.
 
+Use `visibility`, not `status`, to describe whether content is public, private, internal, sanitized, or synthetic. `status` describes lifecycle or maturity only; `status: "private"` is not a valid value for any content type. See `CONTENT_MODEL.md` §3.2 and §19 for the shared vocabularies.
+
 ---
 
 ## 14. Visual Design Direction

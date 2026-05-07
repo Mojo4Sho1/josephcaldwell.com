@@ -1,0 +1,34 @@
+---
+import { primaryNavigation } from "../data/navigation";
+import { site } from "../data/site";
+import { withBase, isCurrentPath } from "../utils/paths";
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="site-header__wordmark" href={withBase("/")}>{site.name}</a>
+    <nav class="site-nav" aria-label="Primary">
+      <ul class="site-nav__list">
+        {
+          primaryNavigation.map((item) => {
+            const href = withBase(item.href);
+            const current = isCurrentPath(currentPath, item.href);
+            return (
+              <li>
+                <a
+                  class="site-nav__link"
+                  href={href}
+                  aria-current={current ? "page" : undefined}
+                >
+                  {item.label}
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </nav>
+  </div>
+</header>

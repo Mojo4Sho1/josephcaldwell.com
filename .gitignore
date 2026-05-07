@@ -147,3 +147,6 @@ vite.config.ts.timestamp-*
 
 # macOS
 .DS_Store
+
+# Local agent-harness state (per-machine, never committed)
+.claude/

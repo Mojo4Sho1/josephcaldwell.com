@@ -1,0 +1,35 @@
+---
+import { primaryNavigation } from "../data/navigation";
+import { site } from "../data/site";
+import { withBase } from "../utils/paths";
+
+const year = new Date().getFullYear();
+const footerLinks = primaryNavigation.filter((item) =>
+  ["/cv/", "/about/", "/contact/"].includes(item.href),
+);
+---
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <p class="site-footer__identity">{site.identitySummary}</p>
+    {
+      footerLinks.length > 0 && (
+        <nav aria-label="Footer">
+          <ul class="site-footer__nav-list">
+            {footerLinks.map((item) => (
+              <li>
+                <a class="site-footer__nav-link" href={withBase(item.href)}>
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )
+    }
+    <p class="site-footer__copyright">
+      &copy; {year} {site.author}. Source code is MIT licensed; written content
+      is reserved. See NOTICE.md.
+    </p>
+  </div>
+</footer>

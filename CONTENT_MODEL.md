@@ -105,25 +105,27 @@ notes: ""
 
 ### `status` and `visibility`
 
-`status` and `visibility` describe different things and should not be conflated:
+`status` and `visibility` describe different things and must not be conflated:
 
-- `status` describes **lifecycle or maturity** — where a content item is in its development arc (planned, draft, active, prototype, published, archived).
-- `visibility` describes **public/private exposure** — who is allowed to see the content (public, private, internal, sanitized, synthetic-demo).
+- `status` describes **lifecycle or maturity** — where a content item is in its development arc.
+- `visibility` describes **exposure or publication safety** — whether the content is safe to render publicly and in what form.
 
-A single item can combine these freely. For example, a project may be `status: "active"` and `visibility: "private"` at the same time. The historical value `status: "private"` is retained only for items that are deliberately not shipped (effectively shelved); for everything else, prefer setting `visibility: "private"` and leaving `status` to describe maturity.
+A single item combines the two freely. A project may be `status: "active"` and `visibility: "private"` at the same time. **Do not use `status: "private"`.** Public/private exposure belongs only in `visibility`; if an item is shelved, use `status: "archived"` (and set `visibility` to whatever is appropriate).
 
-### `status`
+### Shared status vocabulary
 
-Recommended values:
+Use values from this base set. Per-content-type schemas may narrow it; see the per-type sections below.
 
 ```yaml
-status: "active"
-status: "prototype"
-status: "published"
-status: "archived"
-status: "planned"
-status: "private"
-status: "draft"
+status: "planned"      # intended but not yet started or describable
+status: "draft"        # exists but incomplete or not ready for publication
+status: "active"       # currently ongoing work
+status: "prototype"    # working or partially working experimental system
+status: "submitted"    # submitted for review, not yet accepted
+status: "accepted"     # accepted but not yet published or presented
+status: "published"    # publicly available as a finished artifact
+status: "presented"    # presented as a talk, poster, lecture, or demo
+status: "archived"     # no longer active, retained for historical context
 ```
 
 ### `category`
@@ -150,16 +152,14 @@ Example:
 featured: true
 ```
 
-### `visibility`
-
-Recommended values:
+### Shared visibility vocabulary
 
 ```yaml
-visibility: "public"
-visibility: "private"
-visibility: "internal"
-visibility: "sanitized"
-visibility: "synthetic-demo"
+visibility: "public"           # fully safe to show publicly
+visibility: "private"          # known to exist but not public-facing; describe only at high level
+visibility: "internal"         # internal tracking or future use; do not render publicly unless explicitly allowed
+visibility: "sanitized"        # public-facing version exists; sensitive details removed
+visibility: "synthetic-demo"   # public-facing demo uses synthetic data or mock examples
 ```
 
 ### `links`
@@ -303,13 +303,14 @@ category: "Archived Project"
 ## 5.4 Recommended Status Values
 
 ```yaml
+status: "planned"
 status: "active"
 status: "prototype"
 status: "published"
 status: "archived"
-status: "planned"
-status: "private"
 ```
+
+To indicate that a project is not public-facing, set `visibility: "private"` (or another visibility value) rather than encoding it in `status`.
 
 ## 5.5 Field Notes
 
@@ -957,7 +958,7 @@ src/content/writing/
 src/content/teaching/
 ```
 
-For version 1, talks live inside the Writing collection using `type: "talk"` rather than a separate `src/content/talks/` collection. A standalone talks collection (and a `/talks/` page) may be added later if and when the writing collection grows enough to warrant a split.
+For version 1, talks live inside the Writing collection using `type: "talk"` rather than a separate `src/content/talks/` collection. The standalone Talk content type in §10 is documentation of the conceptual fields; in v1 those fields are expressed on Writing entries. A separate `talks` collection (and a `/talks/` page) may be added later if and when the writing collection grows enough to warrant a split.
 
 ---
 
@@ -1067,26 +1068,24 @@ The public CV should omit private address, sensitive personal details, and confi
 
 ## 19. Content Lifecycle
 
-Content should move through clear stages.
+Content should move through clear stages. Each content type narrows the shared vocabulary in §3.2 to the values that are meaningful for that type. Implemented per-type status enums (see `src/content.config.ts`):
 
-Recommended lifecycle values:
-
-```yaml
-status: "planned"
-status: "draft"
-status: "active"
-status: "prototype"
-status: "published"
-status: "archived"
+```text
+research-themes:    planned | active | archived
+projects:           planned | active | prototype | published | archived
+agentic-systems:    planned | draft | active | prototype | published | archived
+dashboards:         planned | prototype | active | published | archived
+writing:            planned | draft | submitted | accepted | published | presented | archived
+teaching:           planned | active | archived
 ```
 
 Typical lifecycle:
 
 ```text
-planned → draft → active/prototype → published → archived
+planned → draft → active/prototype → submitted/accepted → published/presented → archived
 ```
 
-Not all content types need every status.
+Not all content types need every status. `status: "private"` is not a valid value for any type; use `visibility` to describe public/private exposure.
 
 ---
 
